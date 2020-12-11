@@ -18,11 +18,11 @@ def load(f):
     return np.load(f)
 
 
-# Load the data
-x_train = load('data/kmnist-train-imgs/arr_0.npy')
-y_train = load('data/kmnist-train-labels/arr_0.npy')
-x_test = load('data/kmnist-test-imgs/arr_0.npy')
-y_test = load('data/kmnist-test-labels/arr_0.npy')
+# Load the data_npy
+x_train = load('data_npy/kmnist-train-imgs/arr_0.npy')
+y_train = load('data_npy/kmnist-train-labels/arr_0.npy')
+x_test = load('data_npy/kmnist-test-imgs/arr_0.npy')
+y_test = load('data_npy/kmnist-test-labels/arr_0.npy')
 
 if K.image_data_format() == 'channels_first':
     x_train = x_train.reshape(x_train.shape[0], 1, img_rows, img_cols)

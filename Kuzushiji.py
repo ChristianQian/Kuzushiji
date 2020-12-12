@@ -69,6 +69,12 @@ model = keras.Sequential(
         keras.layers.Dense(10, activation='softmax')
     ])
 
+def lr_decay(epoch):
+  return 0.01 * math.pow(0.666, epoch)
+
+# lr schedule callback
+lr_decay_callback = tf.keras.callbacks.LearningRateScheduler(lr_decay, verbose=True)
+
 model.compile(optimizer=keras.optimizers.Adam(lr=0.01),
               loss='categorical_crossentropy',
               metrics=['accuracy'])
@@ -77,7 +83,7 @@ model.fit(x_train, y_train,
           batch_size=batch_size,
           epochs=epochs,
           verbose=1,
-          validation_data=(x_test, y_test))
+          validation_data=(x_test, y_test), callbacks=[lr_decay_callback])
 
 train_score = model.evaluate(x_train, y_train, verbose=0)
 test_score = model.evaluate(x_test, y_test, verbose=0)
